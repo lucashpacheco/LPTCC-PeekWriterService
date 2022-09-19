@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using UserService.Model.Responses.Common;
 using PeekWriterService.Models.Responses.Common;
 
 namespace PeekWriterService.API.Controllers
