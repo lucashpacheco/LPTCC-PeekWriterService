@@ -11,5 +11,10 @@ namespace PeekWriterService.Models.Domain
         public string Message { get; set; }
         [BsonRequired]
         public DateTime CreatedDate { get; set; }
+
+        public Comment (DateTime createdDate)
+        {
+            CreatedDate = DateTime.UtcNow;
+        }
     }
 }
