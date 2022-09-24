@@ -5,7 +5,7 @@ using PeekWriterService.Service.Interfaces;
 using PeekWriterService.Models.Common;
 using PeekWriterService.Repository.Repositories;
 
-namespace UserService.API.Config
+namespace PeekWriterService.API.Config
 {
     public static class DependencyInjectionConfiguration
     {
