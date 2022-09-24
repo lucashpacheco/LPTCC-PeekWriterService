@@ -1,19 +1,32 @@
 ﻿using System.Collections.Generic;
+using System.Reflection.Metadata;
 using PeekWriterService.Models.Commands;
 using PeekWriterService.Models.Domain;
 using PeekWriterService.Models.Responses.Common;
+using PeekWriterService.Service.Interfaces;
 
 namespace PeekWriterService.Service
 {
     public class CommandHandler
     {
+        private readonly ILikesRepository _likesRepository;
+        private readonly IPeekRepository _peekRepository;
+        private readonly ICommentsRepository _commentsRepository;
+
+        public CommandHandler(IPeekRepository peekRepository, ICommentsRepository commentsRepository , ILikesRepository likesRepository)
+        {
+            _peekRepository = peekRepository;
+            _commentsRepository = commentsRepository;
+            _likesRepository = likesRepository;
+        }
+
         public ResponseBase<bool> Create(CreatePeekCommand createPeekCommand)
         {
             var response = new ResponseBase<bool>(success: false, errors: new List<string>(), data: false);
 
             var document = new PeekDocument(createPeekCommand);
 
-            //TODO chama a repository
+            var result = _peekRepository.Save(document);
 
             return response;
         }
@@ -24,7 +37,7 @@ namespace PeekWriterService.Service
 
             var document = new CommentsDocument(createCommentCommand);
 
-            //TODO chama a repository
+            var result = _commentsRepository.Save(document);
 
             return response;
         }
@@ -35,7 +48,7 @@ namespace PeekWriterService.Service
 
             var document = new LikesDocument(createLikeCommand);
 
-            //TODO chama a repository
+            var result = _likesRepository.Save(document);
 
             return response;
         }
@@ -44,8 +57,9 @@ namespace PeekWriterService.Service
         {
             var response = new ResponseBase<bool>(success: false, errors: new List<string>(), data: false);
 
-            
-            //TODO apagar likes , comments e peek
+
+            var result = _peekRepository.Delete(deletePeekCommand.Id);
+
 
             return response;
         }
@@ -54,7 +68,7 @@ namespace PeekWriterService.Service
         {
             var response = new ResponseBase<bool>(success: false, errors: new List<string>(), data: false);
 
-            //TODO chama a repository
+            var result = _commentsRepository.Delete(deleteCommentCommand.CommentId);
 
             return response;
         }
@@ -63,7 +77,7 @@ namespace PeekWriterService.Service
         {
             var response = new ResponseBase<bool>(success: false, errors: new List<string>(), data: false);
 
-            //TODO chama a repository
+            var result = _likesRepository.Delete(deleteLikeCommand.PeekId);
 
             return response;
         }
@@ -74,7 +88,7 @@ namespace PeekWriterService.Service
 
             var document = new PeekDocument(updatePeekCommand);
 
-            //TODO chama a repository
+            var result = _peekRepository.Update(document);
 
             return response;
         }
@@ -85,7 +99,7 @@ namespace PeekWriterService.Service
 
             var document = new CommentsDocument(updateCommentCommand);
 
-            //TODO chama a repository
+            //var result = _commentsRepository.Update(document);
 
             return response;
         }

@@ -5,10 +5,11 @@ using MongoDB.Driver;
 using PeekWriterService.API.Config;
 using PeekWriterService.Models.Domain;
 using PeekWriterService.Repository.Contexts;
+using PeekWriterService.Service.Interfaces;
 
 namespace PeekWriterService.Repository.Repositories
 {
-    public class PeekRepository
+    public class PeekRepository : IPeekRepository
     {
         public readonly PeekContext _peekContext;
         public PeekRepository(IOptions<ConfigDb> options)

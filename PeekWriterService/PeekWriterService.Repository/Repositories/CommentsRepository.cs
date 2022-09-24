@@ -1,21 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using CommentsWriterService.API.Config;
-using CommentsWriterService.Repository.Contexts;
-using UserService.Model.Domain;
-using PeekWriterService.Repository.Contexts;
-using PeekWriterService.Models.Domain;
 using PeekWriterService.API.Config;
+using PeekWriterService.Models.Domain;
+using PeekWriterService.Repository.Contexts;
+using PeekWriterService.Service.Interfaces;
 
 namespace CommentsWriterService.Repository.Repositories
 {
-    public class CommentsRepository
+    public class CommentsRepository : ICommentsRepository
     {
         public readonly CommentContext _commentsContext;
         public CommentsRepository(IOptions<ConfigDb> options)
@@ -28,26 +23,25 @@ namespace CommentsWriterService.Repository.Repositories
             var updateResult = await _commentsContext.Comments.UpdateOneAsync(
                 x => x.PeekId == commentsDocument.PeekId,
                 Builders<CommentsDocument>
-                .Update
-                .AddToSet<Comment>("Comments", commentsDocument.Comments[0])
+                .Update.AddToSetEach("Comments", commentsDocument.Comments)
                 );
 
             return updateResult.IsAcknowledged &&
                      updateResult.ModifiedCount > 0;
         }
 
-        public async Task<bool> Update(CommentsDocument commentsDocument)
-        {
-            var updateResult = await _commentsContext.Comments.UpdateOneAsync(
-                x => x.PeekId == commentsDocument.PeekId , 
-                Builders<CommentsDocument>
-                .Update
-                .Set(x => x.Comments.Where(x => x.Id == commentsDocument.Comments[0].Id), commentsDocument.Comments[0].Message)
-                );
+        //public async Task<bool> Update(CommentsDocument commentsDocument)
+        //{
+        //    var updateResult = await _commentsContext.Comments.UpdateOneAsync(
+        //        x => x.PeekId == commentsDocument.PeekId && x.Id == commentsDocument.Comments[0].Id, 
+        //        Builders<CommentsDocument>
+        //        .Update
+        //        .Set(x => x.Comments.Find(x => ), commentsDocument.Comments[0].Message)
+        //        );
 
-            return updateResult.IsAcknowledged &&
-                     updateResult.ModifiedCount > 0;
-        }
+        //    return updateResult.IsAcknowledged &&
+        //             updateResult.ModifiedCount > 0;
+        //}
 
         public async Task<bool> Delete(Guid? id)
         {

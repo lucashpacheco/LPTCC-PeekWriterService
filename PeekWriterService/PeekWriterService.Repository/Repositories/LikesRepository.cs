@@ -2,15 +2,14 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using LikesWriterService.API.Config;
-using LikesWriterService.Repository.Contexts;
 using PeekWriterService.API.Config;
-using PeekWriterService.Repository.Contexts;
 using PeekWriterService.Models.Domain;
+using PeekWriterService.Repository.Contexts;
+using PeekWriterService.Service.Interfaces;
 
 namespace LikesWriterService.Repository.Repositories
 {
-    public class LikesRepository
+    public class LikesRepository : ILikesRepository
     {
         public readonly LikeContext _likesContext;
         public LikesRepository(IOptions<ConfigDb> options)
@@ -31,7 +30,7 @@ namespace LikesWriterService.Repository.Repositories
                 x => x.PeekId == likesDocument.PeekId, 
                 Builders<LikesDocument>
                 .Update
-                .AddToSet<Like>( "Likes" , likesDocument.Likes[0])
+                .AddToSetEach( "Likes" , likesDocument.Likes)
                 );
 
             return updateResult.IsAcknowledged &&
@@ -40,7 +39,7 @@ namespace LikesWriterService.Repository.Repositories
 
         public async Task<bool> Delete(Guid? id)
         {
-            var deletedResult = await _likesContext.Likes.DeleteOneAsync(x => x.Id == id);
+            var deletedResult = await _likesContext.Likes.DeleteOneAsync(x => x.PeekId == id);
 
             return deletedResult.IsAcknowledged &&
                      deletedResult.DeletedCount > 0;
