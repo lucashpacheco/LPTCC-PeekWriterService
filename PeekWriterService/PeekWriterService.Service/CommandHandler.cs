@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using PeekWriterService.Models.Commands;
 using PeekWriterService.Models.Domain;
 using PeekWriterService.Models.Responses.Common;
-using UserService.Model.Domain;
 
 namespace PeekWriterService.Service
 {

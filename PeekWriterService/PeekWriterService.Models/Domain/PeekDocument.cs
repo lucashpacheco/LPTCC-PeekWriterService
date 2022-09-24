@@ -2,7 +2,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 using PeekWriterService.Models.Commands;
 
-namespace UserService.Model.Domain
+namespace PeekWriterService.Models.Domain
 {
     public class PeekDocument
     {

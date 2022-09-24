@@ -6,7 +6,10 @@ namespace PeekWriterService.Models.Domain
     public class Comment
     {
         [BsonRequired]
-        public int AuthorId { get; set; }
+        public Guid? Id { get; set; }
+
+        [BsonRequired]
+        public Guid? AuthorId { get; set; }
         [BsonRequired]
         public string Message { get; set; }
         [BsonRequired]
