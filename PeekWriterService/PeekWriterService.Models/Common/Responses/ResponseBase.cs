@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 
-namespace PeekWriterService.Models.Responses.Common
+namespace PeekWriterService.Models.Common.Responses
 {
     public class ResponseBase<T>
     {
         public ResponseBase(bool success, List<string> errors, T data)
         {
-            this.Success = success;
-            this.Errors = errors;
-            this.Data = data;
+            Success = success;
+            Errors = errors;
+            Data = data;
         }
 
         public T Data { get; set; }

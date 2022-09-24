@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -8,7 +7,7 @@ using PeekWriterService.Models.Domain;
 using PeekWriterService.Repository.Contexts;
 using PeekWriterService.Service.Interfaces;
 
-namespace CommentsWriterService.Repository.Repositories
+namespace PeekWriterService.Repository.Repositories
 {
     public class CommentsRepository : ICommentsRepository
     {
@@ -45,7 +44,7 @@ namespace CommentsWriterService.Repository.Repositories
 
         public async Task<bool> Delete(Guid? id)
         {
-            var deletedResult = await _commentsContext.Comments.DeleteOneAsync(x => x.Id == id);
+            var deletedResult = await _commentsContext.Comments.DeleteOneAsync(x => x.PeekId == id);
 
             return deletedResult.IsAcknowledged &&
                      deletedResult.DeletedCount > 0;

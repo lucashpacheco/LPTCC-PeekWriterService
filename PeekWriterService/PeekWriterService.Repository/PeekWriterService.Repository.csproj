@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PeekWriterService.API\PeekWriterService.API.csproj" />
     <ProjectReference Include="..\PeekWriterService.Service\PeekWriterService.Service.csproj" />
   </ItemGroup>
 

@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
-using System.Reflection.Metadata;
 using PeekWriterService.Models.Commands;
+using PeekWriterService.Models.Common;
+using PeekWriterService.Models.Common.Responses;
 using PeekWriterService.Models.Domain;
-using PeekWriterService.Models.Responses.Common;
 using PeekWriterService.Service.Interfaces;
 
 namespace PeekWriterService.Service
 {
-    public class CommandHandler
+    public class CommandHandler : ICommandHandler
     {
         private readonly ILikesRepository _likesRepository;
         private readonly IPeekRepository _peekRepository;

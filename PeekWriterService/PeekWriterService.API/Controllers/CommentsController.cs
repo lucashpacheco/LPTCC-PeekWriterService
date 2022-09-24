@@ -7,12 +7,12 @@ namespace PeekWriterService.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PeekController : ControllerBase
+    public class CommentsController : ControllerBase
     {
        
         private readonly ILogger<PeekController> _logger;
 
-        public PeekController(ILogger<PeekController> logger)
+        public CommentsController(ILogger<PeekController> logger)
         {
             _logger = logger;
         }

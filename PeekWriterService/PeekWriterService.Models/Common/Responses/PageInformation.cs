@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace PeekWriterService.Models.Responses.Common
+namespace PeekWriterService.Models.Common.Responses
 {
     public class PageInformation
     {

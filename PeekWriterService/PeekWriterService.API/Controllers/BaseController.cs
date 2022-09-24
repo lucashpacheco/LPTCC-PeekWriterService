@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using PeekWriterService.Models.Responses.Common;
+using PeekWriterService.Models.Common.Responses;
 
 namespace PeekWriterService.API.Controllers
 {

@@ -7,7 +7,7 @@ using PeekWriterService.Models.Domain;
 using PeekWriterService.Repository.Contexts;
 using PeekWriterService.Service.Interfaces;
 
-namespace LikesWriterService.Repository.Repositories
+namespace PeekWriterService.Repository.Repositories
 {
     public class LikesRepository : ILikesRepository
     {
