@@ -23,7 +23,7 @@ namespace PeekWriterService.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ResponseBase<bool>> Create([FromQuery] CreatePeekCommand createPeekCommand)
+        public async Task<ResponseBase<bool>> Create([FromBody] CreatePeekCommand createPeekCommand)
         {
             var result = await _commandHandler.Create(createPeekCommand);
 
@@ -31,7 +31,7 @@ namespace PeekWriterService.API.Controllers
         }
 
         [HttpPut]
-        public async Task<ResponseBase<bool>> Update([FromQuery] UpdatePeekCommand updateCommentCommand)
+        public async Task<ResponseBase<bool>> Update([FromBody] UpdatePeekCommand updateCommentCommand)
         {
             var result = await _commandHandler.Update(updateCommentCommand);
 

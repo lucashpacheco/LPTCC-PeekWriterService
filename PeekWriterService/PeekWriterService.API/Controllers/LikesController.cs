@@ -23,7 +23,7 @@ namespace PeekWriterService.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ResponseBase<bool>> Create([FromQuery] CreateLikeCommand createPeekCommand)
+        public async Task<ResponseBase<bool>> Create([FromBody] CreateLikeCommand createPeekCommand)
         {
             var result = await _commandHandler.Create(createPeekCommand);
 
