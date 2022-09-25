@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using PeekWriterService.Models.Commands;
 using PeekWriterService.Models.Common;
 using PeekWriterService.Models.Common.Responses;
@@ -20,86 +21,86 @@ namespace PeekWriterService.Service
             _likesRepository = likesRepository;
         }
 
-        public ResponseBase<bool> Create(CreatePeekCommand createPeekCommand)
+        public async Task<ResponseBase<bool>> Create(CreatePeekCommand createPeekCommand)
         {
             var response = new ResponseBase<bool>(success: false, errors: new List<string>(), data: false);
 
             var document = new PeekDocument(createPeekCommand);
 
-            var result = _peekRepository.Save(document);
+            var result = await _peekRepository.Save(document);
 
             return response;
         }
 
-        public ResponseBase<bool> Create(CreateCommentCommand createCommentCommand)
+        public async Task<ResponseBase<bool>> Create(CreateCommentCommand createCommentCommand)
         {
             var response = new ResponseBase<bool>(success: false, errors: new List<string>(), data: false);
 
             var document = new CommentsDocument(createCommentCommand);
 
-            var result = _commentsRepository.Save(document);
+            var result = await _commentsRepository.Save(document);
 
             return response;
         }
 
-        public ResponseBase<bool> Create(CreateLikeCommand createLikeCommand)
+        public async Task<ResponseBase<bool>> Create(CreateLikeCommand createLikeCommand)
         {
             var response = new ResponseBase<bool>(success: false, errors: new List<string>(), data: false);
 
             var document = new LikesDocument(createLikeCommand);
 
-            var result = _likesRepository.Save(document);
+            var result = await _likesRepository.Save(document);
 
             return response;
         }
 
-        public ResponseBase<bool> Delete(DeletePeekCommand deletePeekCommand)
+        public async Task<ResponseBase<bool>> Delete(DeletePeekCommand deletePeekCommand)
         {
             var response = new ResponseBase<bool>(success: false, errors: new List<string>(), data: false);
 
 
-            var result = _peekRepository.Delete(deletePeekCommand.Id);
+            var result = await _peekRepository.Delete(deletePeekCommand.Id);
 
 
             return response;
         }
 
-        public ResponseBase<bool> Delete(DeleteCommentCommand deleteCommentCommand)
+        public async Task<ResponseBase<bool>> Delete(DeleteCommentCommand deleteCommentCommand)
         {
             var response = new ResponseBase<bool>(success: false, errors: new List<string>(), data: false);
 
-            var result = _commentsRepository.Delete(deleteCommentCommand.CommentId);
+            var result = await _commentsRepository.Delete(deleteCommentCommand.CommentId);
 
             return response;
         }
 
-        public ResponseBase<bool> Delete(DeleteLikeCommand deleteLikeCommand)
+        public async Task<ResponseBase<bool>> Delete(DeleteLikeCommand deleteLikeCommand)
         {
             var response = new ResponseBase<bool>(success: false, errors: new List<string>(), data: false);
 
-            var result = _likesRepository.Delete(deleteLikeCommand.PeekId);
+            var result = await _likesRepository.Delete(deleteLikeCommand.PeekId);
 
             return response;
         }
 
-        public ResponseBase<bool> Update(UpdatePeekCommand updatePeekCommand)
+        public async Task<ResponseBase<bool>> Update(UpdatePeekCommand updatePeekCommand)
         {
             var response = new ResponseBase<bool>(success: false, errors: new List<string>(), data: false);
 
             var document = new PeekDocument(updatePeekCommand);
 
-            var result = _peekRepository.Update(document);
+            var result = await _peekRepository.Update(document);
 
             return response;
         }
 
-        public ResponseBase<bool> Update(UpdateCommentCommand updateCommentCommand)
+        public async Task<ResponseBase<bool>> Update(UpdateCommentCommand updateCommentCommand)
         {
             var response = new ResponseBase<bool>(success: false, errors: new List<string>(), data: false);
 
             var document = new CommentsDocument(updateCommentCommand);
 
-            //var result = _commentsRepository.Update(document);
+            //var result = await _commentsRepository.Update(document);
 
             return response;
         }

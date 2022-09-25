@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PeekWriterService.Models.Commands;
+using PeekWriterService.Models.Common;
 using PeekWriterService.Models.Common.Responses;
 
 namespace PeekWriterService.API.Controllers
@@ -11,28 +13,37 @@ namespace PeekWriterService.API.Controllers
     {
        
         private readonly ILogger<PeekController> _logger;
+        private readonly ICommandHandler _commandHandler;
 
-        public CommentsController(ILogger<PeekController> logger)
+
+        public CommentsController(ILogger<PeekController> logger, ICommandHandler commandHandler)
         {
             _logger = logger;
+            _commandHandler = commandHandler;
         }
 
         [HttpPost]
-        public ResponseBase<bool> Create([FromQuery] CreatePeekCommand createPeekCommand)
+        public async Task<ResponseBase<bool>> Create([FromQuery] CreateCommentCommand createPeekCommand)
         {
-            return null;
+            var result = await _commandHandler.Create(createPeekCommand);
+
+            return result;
         }
 
         [HttpPut]
-        public ResponseBase<bool> Update([FromQuery] UpdateCommentCommand updateCommentCommand)
+        public async Task<ResponseBase<bool>> Update([FromQuery] UpdateCommentCommand updateCommentCommand)
         {
-            return null;
+            var result = await _commandHandler.Update(updateCommentCommand);
+
+            return result;
         }
 
         [HttpDelete]
-        public ResponseBase<bool> Delete([FromQuery] DeleteCommentCommand deleteCommentCommand)
+        public async Task<ResponseBase<bool>> Delete([FromQuery] DeleteCommentCommand deleteCommentCommand)
         {
-            return null;
+            var result = await _commandHandler.Delete(deleteCommentCommand);
+
+            return result;
         }
     }
 }
