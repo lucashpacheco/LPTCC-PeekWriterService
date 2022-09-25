@@ -29,6 +29,12 @@ namespace PeekWriterService.Service
 
             var result = await _peekRepository.Save(document);
 
+            if (!result)
+                return response;
+
+            response.Success = true;
+            response.Data = result;
+
             return response;
         }
 
@@ -39,6 +45,12 @@ namespace PeekWriterService.Service
             var document = new CommentsDocument(createCommentCommand);
 
             var result = await _commentsRepository.Save(document);
+
+            if (!result)
+                return response;
+
+            response.Success = true;
+            response.Data = result;
 
             return response;
         }
@@ -51,6 +63,12 @@ namespace PeekWriterService.Service
 
             var result = await _likesRepository.Save(document);
 
+            if (!result)
+                return response;
+
+            response.Success = true;
+            response.Data = result;
+
             return response;
         }
 
@@ -61,6 +79,11 @@ namespace PeekWriterService.Service
 
             var result = await _peekRepository.Delete(deletePeekCommand.Id);
 
+            if (!result)
+                return response;
+
+            response.Success = true;
+            response.Data = result;
 
             return response;
         }
@@ -71,6 +94,12 @@ namespace PeekWriterService.Service
 
             var result = await _commentsRepository.Delete(deleteCommentCommand.CommentId);
 
+            if (!result)
+                return response;
+
+            response.Success = true;
+            response.Data = result;
+
             return response;
         }
 
@@ -79,6 +108,12 @@ namespace PeekWriterService.Service
             var response = new ResponseBase<bool>(success: false, errors: new List<string>(), data: false);
 
             var result = await _likesRepository.Delete(deleteLikeCommand.PeekId);
+
+            if (!result)
+                return response;
+
+            response.Success = true;
+            response.Data = result;
 
             return response;
         }
@@ -91,6 +126,12 @@ namespace PeekWriterService.Service
 
             var result = await _peekRepository.Update(document);
 
+            if (!result)
+                return response;
+
+            response.Success = true;
+            response.Data = result;
+
             return response;
         }
 
@@ -101,6 +142,12 @@ namespace PeekWriterService.Service
             var document = new CommentsDocument(updateCommentCommand);
 
             //var result = await _commentsRepository.Update(document);
+
+            //if (!result)
+            //    return response;
+
+            //response.Success = true;
+            //response.Data = result;
 
             return response;
         }
