@@ -1,17 +1,18 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using PeekWriterService.Models.Commands;
+using Peek.Framework.Common.Responses;
+using Peek.Framework.Common.Utils;
+using Peek.Framework.PeekServices.PeekWriter.Commands;
 using PeekWriterService.Models.Common;
-using PeekWriterService.Models.Common.Responses;
 
 namespace PeekWriterService.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CommentsController : ControllerBase
+    public class CommentsController : BaseController
     {
-       
+
         private readonly ILogger<PeekController> _logger;
         private readonly ICommandHandler _commandHandler;
 

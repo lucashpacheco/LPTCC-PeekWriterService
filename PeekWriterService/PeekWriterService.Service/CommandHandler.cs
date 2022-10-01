@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using PeekWriterService.Models.Commands;
+using Peek.Framework.Common.Responses;
+using Peek.Framework.PeekServices.Documents;
+using Peek.Framework.PeekServices.PeekWriter.Commands;
 using PeekWriterService.Models.Common;
-using PeekWriterService.Models.Common.Responses;
-using PeekWriterService.Models.Domain;
 using PeekWriterService.Service.Interfaces;
 
 namespace PeekWriterService.Service
@@ -14,7 +14,7 @@ namespace PeekWriterService.Service
         private readonly IPeekRepository _peekRepository;
         private readonly ICommentsRepository _commentsRepository;
 
-        public CommandHandler(IPeekRepository peekRepository, ICommentsRepository commentsRepository , ILikesRepository likesRepository)
+        public CommandHandler(IPeekRepository peekRepository, ICommentsRepository commentsRepository, ILikesRepository likesRepository)
         {
             _peekRepository = peekRepository;
             _commentsRepository = commentsRepository;

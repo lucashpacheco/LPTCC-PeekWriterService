@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using Peek.Framework.PeekServices.Documents;
 using PeekWriterService.API.Config;
-using PeekWriterService.Models.Domain;
 using PeekWriterService.Repository.Contexts;
 using PeekWriterService.Service.Interfaces;
 
@@ -23,11 +23,11 @@ namespace PeekWriterService.Repository.Repositories
                 x => x.PeekId == commentsDocument.PeekId,
                 Builders<CommentsDocument>.Update
                                           .AddToSetEach("Comments", commentsDocument.Comments),
-                new UpdateOptions { IsUpsert = true});
+                new UpdateOptions { IsUpsert = true });
 
             return updateResult.IsAcknowledged &&
-                     updateResult.ModifiedCount > 0 || 
-                     updateResult.IsAcknowledged && 
+                     updateResult.ModifiedCount > 0 ||
+                     updateResult.IsAcknowledged &&
                      !String.IsNullOrEmpty(updateResult.UpsertedId.ToString());
         }
 

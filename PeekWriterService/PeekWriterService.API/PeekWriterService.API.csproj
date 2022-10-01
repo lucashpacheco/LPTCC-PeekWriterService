@@ -17,4 +17,10 @@
     <ProjectReference Include="..\PeekWriterService.Service\PeekWriterService.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Peek.Framework">
+      <HintPath>..\DLLs\Peek.Framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

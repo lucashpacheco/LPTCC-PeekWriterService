@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using PeekWriterService.Models.Domain;
+using Peek.Framework.PeekServices.Documents;
 
 namespace PeekWriterService.Service.Interfaces
 {

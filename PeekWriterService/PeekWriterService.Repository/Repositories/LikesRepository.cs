@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using Peek.Framework.PeekServices.Documents;
 using PeekWriterService.API.Config;
-using PeekWriterService.Models.Domain;
 using PeekWriterService.Repository.Contexts;
 using PeekWriterService.Service.Interfaces;
 
@@ -27,9 +27,9 @@ namespace PeekWriterService.Repository.Repositories
         public async Task<bool> Update(LikesDocument likesDocument)
         {
             var updateResult = await _likesContext.Likes.UpdateOneAsync(
-                x => x.PeekId == likesDocument.PeekId, 
+                x => x.PeekId == likesDocument.PeekId,
                 Builders<LikesDocument>.Update
-                                       .AddToSetEach( "Likes" , likesDocument.Likes),
+                                       .AddToSetEach("Likes", likesDocument.Likes),
                 new UpdateOptions { IsUpsert = true }
                 );
 
@@ -41,7 +41,7 @@ namespace PeekWriterService.Repository.Repositories
             return updateResult.IsAcknowledged &&
                      updateResult.ModifiedCount > 0 ||
                      updateResult.IsAcknowledged &&
-                     !String.IsNullOrEmpty(updateResult.UpsertedId.ToString()); 
+                     !String.IsNullOrEmpty(updateResult.UpsertedId.ToString());
         }
 
         public async Task<bool> Delete(Guid? id)
