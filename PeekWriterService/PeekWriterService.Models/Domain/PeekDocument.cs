@@ -7,9 +7,9 @@ namespace PeekWriterService.Models.Domain
     public class PeekDocument
     {
         [BsonId]
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
         [BsonRequired]
-        public Guid? AuthorId { get; set; }
+        public Guid AuthorId { get; set; }
         [BsonRequired]
         public string Message { get; set; }
         [BsonRequired]
@@ -17,16 +17,16 @@ namespace PeekWriterService.Models.Domain
 
         public PeekDocument(CreatePeekCommand createPeekCommand)
         {
-            this.Id = createPeekCommand.Id;
-            this.AuthorId = createPeekCommand.AuthorId;
+            this.Id = (Guid)createPeekCommand.Id;
+            this.AuthorId = (Guid)createPeekCommand.AuthorId;
             this.Message = createPeekCommand.Message;
             this.CreatedDate = DateTime.UtcNow;
         }
 
         public PeekDocument(UpdatePeekCommand updatePeekCommand)
         {
-            this.Id = updatePeekCommand.Id;
-            this.AuthorId = updatePeekCommand.AuthorId;  
+            this.Id = (Guid)updatePeekCommand.Id;
+            this.AuthorId = (Guid)updatePeekCommand.AuthorId;  
             this.Message = updatePeekCommand.Message;
             this.CreatedDate = DateTime.UtcNow;
         }

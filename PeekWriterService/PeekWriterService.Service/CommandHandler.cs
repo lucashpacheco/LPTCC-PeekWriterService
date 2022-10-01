@@ -61,7 +61,7 @@ namespace PeekWriterService.Service
 
             var document = new LikesDocument(createLikeCommand);
 
-            var result = await _likesRepository.Save(document);
+            var result = await _likesRepository.Update(document);
 
             if (!result)
                 return response;

@@ -6,7 +6,7 @@ namespace PeekWriterService.Models.Domain
     public class Like
     {
         [BsonRequired]
-        public int UserId { get; set; }
+        public Guid? UserId { get; set; }
         [BsonRequired]
         public DateTime CreatedDate { get; set; }
 

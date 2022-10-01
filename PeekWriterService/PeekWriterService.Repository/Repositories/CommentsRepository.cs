@@ -21,12 +21,14 @@ namespace PeekWriterService.Repository.Repositories
         {
             var updateResult = await _commentsContext.Comments.UpdateOneAsync(
                 x => x.PeekId == commentsDocument.PeekId,
-                Builders<CommentsDocument>
-                .Update.AddToSetEach("Comments", commentsDocument.Comments)
-                );
+                Builders<CommentsDocument>.Update
+                                          .AddToSetEach("Comments", commentsDocument.Comments),
+                new UpdateOptions { IsUpsert = true});
 
             return updateResult.IsAcknowledged &&
-                     updateResult.ModifiedCount > 0;
+                     updateResult.ModifiedCount > 0 || 
+                     updateResult.IsAcknowledged && 
+                     !String.IsNullOrEmpty(updateResult.UpsertedId.ToString());
         }
 
         //public async Task<bool> Update(CommentsDocument commentsDocument)

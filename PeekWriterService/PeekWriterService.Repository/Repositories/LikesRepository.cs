@@ -28,13 +28,20 @@ namespace PeekWriterService.Repository.Repositories
         {
             var updateResult = await _likesContext.Likes.UpdateOneAsync(
                 x => x.PeekId == likesDocument.PeekId, 
-                Builders<LikesDocument>
-                .Update
-                .AddToSetEach( "Likes" , likesDocument.Likes)
+                Builders<LikesDocument>.Update
+                                       .AddToSetEach( "Likes" , likesDocument.Likes),
+                new UpdateOptions { IsUpsert = true }
                 );
 
+            var test = updateResult.IsAcknowledged &&
+                     updateResult.ModifiedCount > 0 ||
+                     updateResult.IsAcknowledged &&
+                     !String.IsNullOrEmpty(updateResult.UpsertedId.ToString());
+
             return updateResult.IsAcknowledged &&
-                     updateResult.ModifiedCount > 0;
+                     updateResult.ModifiedCount > 0 ||
+                     updateResult.IsAcknowledged &&
+                     !String.IsNullOrEmpty(updateResult.UpsertedId.ToString()); 
         }
 
         public async Task<bool> Delete(Guid? id)

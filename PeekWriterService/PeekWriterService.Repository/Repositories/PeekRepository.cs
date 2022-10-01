@@ -28,13 +28,16 @@ namespace PeekWriterService.Repository.Repositories
         {
             var updateResult = await _peekContext.Peek.UpdateOneAsync(
                 x => x.Id == peekDocument.Id , 
-                Builders<PeekDocument>
-                .Update
-                .Set(x => x.Message, peekDocument.Message)
+                Builders<PeekDocument>.Update
+                                      .Set(x => x.Message, peekDocument.Message),
+                new UpdateOptions { IsUpsert = true }
                 );
 
             return updateResult.IsAcknowledged &&
-                     updateResult.ModifiedCount > 0;
+                     updateResult.ModifiedCount > 0 ||
+                     updateResult.IsAcknowledged &&
+                     !String.IsNullOrEmpty(updateResult.UpsertedId.ToString()); 
+
         }
 
         public async Task<bool> Delete(Guid? id)
