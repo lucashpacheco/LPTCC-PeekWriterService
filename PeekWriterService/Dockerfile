@@ -16,14 +16,14 @@ RUN pwd
 RUN ls ./src
 
 
-RUN dotnet restore ./src/PeekWriterService.sln
-RUN dotnet build ./src/PeekWriterService.sln -c Release --no-restore
-RUN dotnet pack ./src/PeekWriterService.sln -c Release --no-build --output /source/packages
+RUN dotnet restore ./src/PeekWriterService/PeekWriterService.sln
+RUN dotnet build ./src/PeekWriterService/PeekWriterService.sln -c Release --no-restore
+RUN dotnet pack ./src/PeekWriterService/PeekWriterService.sln -c Release --no-build --output /source/packages
 
 # PUBLISH
 RUN echo "Starting publish"
 FROM build AS publish
-RUN dotnet publish "./PeekWriterService.API/PeekWriterService.API.csproj" -c Release --no-build -o /publish
+RUN dotnet publish "./src/PeekWriterService/PeekWriterService.API/PeekWriterService.API.csproj" -c Release --no-build -o /publish
 RUN echo "End publish"
 
 # PACKAGES
