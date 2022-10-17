@@ -13,7 +13,7 @@ USER root
 COPY . ./src
 
 RUN pwd		
-RUN ls
+RUN ls ./src
 
 
 RUN dotnet restore ./src/PeekWriterService.sln
