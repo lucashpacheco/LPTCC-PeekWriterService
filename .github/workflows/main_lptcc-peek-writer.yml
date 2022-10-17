@@ -31,7 +31,7 @@ jobs:
       with:
         push: true
         tags: lptccapi.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_e1399f7bd6224841bc31656aaefe809c }}/peekwriterserviceapi:${{ github.sha }}
-        file: ./PeekWriterService/PeekWriterService.API/Dockerfile
+        file: ./PeekWriterService/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
