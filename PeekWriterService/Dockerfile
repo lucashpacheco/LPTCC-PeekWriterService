@@ -10,11 +10,15 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 
 USER root
 
-COPY . ./
+COPY . ./src
 
-RUN dotnet restore ./PeekWriterService.sln
-RUN dotnet build ./PeekWriterService.sln -c Release --no-restore
-RUN dotnet pack ./PeekWriterService.sln -c Release --no-build --output /source/packages
+RUN pwd		
+RUN ls
+
+
+RUN dotnet restore ./src/PeekWriterService.sln
+RUN dotnet build ./src/PeekWriterService.sln -c Release --no-restore
+RUN dotnet pack ./src/PeekWriterService.sln -c Release --no-build --output /source/packages
 
 # PUBLISH
 RUN echo "Starting publish"
