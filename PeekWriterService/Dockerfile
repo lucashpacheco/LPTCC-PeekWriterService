@@ -9,7 +9,6 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 
 USER root
-WORKDIR /source
 
 COPY . ./
 
