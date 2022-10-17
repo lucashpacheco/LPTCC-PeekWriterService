@@ -6,7 +6,7 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
-WORKDIR /src
+WORKDIR ./
 COPY ["PeekWriterService.API/PeekWriterService.API.csproj", "PeekWriterService.API/"]
 RUN dotnet restore "PeekWriterService.API/PeekWriterService.API.csproj"
 COPY . .
