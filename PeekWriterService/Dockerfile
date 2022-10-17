@@ -6,8 +6,8 @@ EXPOSE 25015
 EXPOSE 25015
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
-COPY . .
-COPY ["./PeekWriterService.API.csproj", "/src/PeekWriterService.API/"]
+COPY . ./
+COPY ["./PeekWriterService.API/PeekWriterService.API.csproj", "/src/PeekWriterService.API/"]
 RUN dotnet restore "./PeekWriterService.API.csproj"
 WORKDIR "/src/PeekWriterService.API"
 RUN dotnet build "PeekWriterService.API.csproj" -c Release -o /app/build
