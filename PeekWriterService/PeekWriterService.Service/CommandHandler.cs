@@ -107,7 +107,7 @@ namespace PeekWriterService.Service
         {
             var response = new ResponseBase<bool>(success: false, errors: new List<string>(), data: false);
 
-            var result = await _likesRepository.Delete(deleteLikeCommand.PeekId);
+            var result = await _likesRepository.Delete(deleteLikeCommand);
 
             if (!result)
                 return response;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Peek.Framework.PeekServices.Documents;
+using Peek.Framework.PeekServices.PeekWriter.Commands;
 
 namespace PeekWriterService.Service.Interfaces
 {
@@ -8,6 +9,6 @@ namespace PeekWriterService.Service.Interfaces
     {
         Task<bool> Save(LikesDocument commentsDocument);
         Task<bool> Update(LikesDocument commentsDocument);
-        Task<bool> Delete(Guid? id);
+        Task<bool> Delete(DeleteLikeCommand deleteLikeCommand);
     }
 }

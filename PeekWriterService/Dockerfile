@@ -1,7 +1,7 @@
 
 # BASE
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
-ENV ASPNETCORE_URLS=http://+:15025
+ENV ASPNETCORE_URLS=http://+:25015
 EXPOSE 25015
 WORKDIR /app
 
