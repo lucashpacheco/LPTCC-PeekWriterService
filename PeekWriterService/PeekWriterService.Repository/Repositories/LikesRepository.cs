@@ -35,11 +35,6 @@ namespace PeekWriterService.Repository.Repositories
                 new UpdateOptions { IsUpsert = true }
                 );
 
-            //var test = updateResult.IsAcknowledged &&
-            //         updateResult.ModifiedCount > 0 ||
-            //         updateResult.IsAcknowledged &&
-            //         !String.IsNullOrEmpty(updateResult.UpsertedId.ToString());
-
             return updateResult.IsAcknowledged &&
                      updateResult.ModifiedCount > 0 ||
                      updateResult.IsAcknowledged &&
@@ -52,18 +47,6 @@ namespace PeekWriterService.Repository.Repositories
             var update = Builders<LikesDocument>.Update.PullFilter(y => y.Likes, builder => builder.UserId == deleteLikeCommand.UserId);
             var result = await _likesContext.Likes.UpdateOneAsync(filter, update);
             return result.IsAcknowledged && result.ModifiedCount > 0;
-
-            //var updateResult = await _likesContext.Likes.UpdateOneAsync(
-            //    x => x.PeekId == id,
-            //    Builders<LikesDocument>.Update
-            //                           .Pull("Likes", Query.EQ("UserId", productId)),
-            //    new UpdateOptions { IsUpsert = true }
-            //    );
-
-            //var deletedResult = await _likesContext.Likes.DeleteOneAsync(x => x.PeekId == id);
-
-            //return deletedResult.IsAcknowledged &&
-            //         deletedResult.DeletedCount > 0;
         }
     }
 }
